@@ -1,0 +1,20 @@
+{
+  "name": "signup",
+  "version": "1.0.0",
+  "private": false,
+  "scripts": {},
+  "dependencies": {
+    "mailgun-js": "0.7.12",
+    "email-validator": "1.0.4"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "luath",
+    "swift",
+    "swift mailing",
+    "swift mailing list api"
+  ],
+  "license": "MIT"
+}
