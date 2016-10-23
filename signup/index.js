@@ -24,14 +24,20 @@ exports.handler = function(event, context, callback) {
     text: 'Hi, I\'d like to have an API key for Luath. My email is: ' + user
   };
 
-  request.post(requestUrl, {
-    'auth': {
-      'user': 'api',
-      'pass': api_key,
-      'sendImmediately': false
-    }
-  }, form: data, function(err,httpResponse,body) {
-    if (error) {
+  var auth = {
+    'user': 'api',
+    'pass': api_key,
+    'sendImmediately': false
+  };
+
+  var requestData = {
+    'url': requestUrl,
+    'form': data,
+    'auth': auth
+  };
+
+  request.post(requestData, function(err, httpResponse, body) {
+    if (err) {
       callback("Error.ServerError.MailError");
       return;
     }
