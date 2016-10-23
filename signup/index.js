@@ -11,8 +11,7 @@ var domain = credentials.domain;
 var requestUrl = "https://api.mailgun.net/v3/"+domain+"/messages"
 
 exports.handler = function(event, context, callback) {
-  var user = event["name"];
-
+  var user = event["body"]["name"];
   if (!validator.validate(user)) {
     callback("Error.InputError.InvalidEmail");
   }
