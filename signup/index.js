@@ -2,12 +2,13 @@
 
 var validator = require("email-validator");
 var fs = require('fs');
+var request = require('request');
 var credentialsPath = './credentials.json';
 var credentials = JSON.parse(fs.readFileSync(credentialsPath));
 
 var api_key = credentials.apiKey;
 var domain = credentials.domain;
-var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+var requestUrl = "https://api.mailgun.net/v3/"+domain+"/messages"
 
 exports.handler = function(event, context, callback) {
   var user = event["name"];
@@ -23,7 +24,13 @@ exports.handler = function(event, context, callback) {
     text: 'Hi, I\'d like to have an API key for Luath. My email is: ' + user
   };
 
-  mailgun.messages().send(data, function (error, body) {
+  request.post(requestUrl, {
+    'auth': {
+      'user': 'api',
+      'pass': api_key,
+      'sendImmediately': false
+    }
+  }, form: data, function(err,httpResponse,body) {
     if (error) {
       callback("Error.ServerError.MailError");
       return;

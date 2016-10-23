@@ -4,7 +4,7 @@
   "private": false,
   "scripts": {},
   "dependencies": {
-    "mailgun-js": "0.7.12",
+    "request": "2.75.0",
     "email-validator": "1.0.4"
   },
   "repository": {
